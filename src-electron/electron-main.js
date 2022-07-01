@@ -22,6 +22,7 @@ function createWindow() {
     /**
      * Initial window options
      */
+    Menu.setApplicationMenu(null);
     mainWindow = new BrowserWindow({
         icon: path.resolve(__dirname, 'icons/icon.png'), // tray icon
         width: 1200,

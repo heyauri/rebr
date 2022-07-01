@@ -53,9 +53,9 @@ export default defineComponent({
                         state.logSrc = assets["logSrc"] || "";
                         state.dataSrc = assets["dataSrc"] || ""
                     });
-                    // console.log(store);
-                    // console.log(store.$state.logSrc, store.$state.dataSrc);
-                    // console.log(store.logSrcPath, store.dataSrcPath);
+                // console.log(store);
+                // console.log(store.$state.logSrc, store.$state.dataSrc);
+                // console.log(store.logSrcPath, store.dataSrcPath);
                 default:
                     break;
             }
@@ -72,6 +72,14 @@ export default defineComponent({
                     target: t
                 });
             }
+        });
+        _this.$global.$on("accessUrl", data => {
+            console.log(data);
+            send2main({
+                source: "main",
+                msg: "accessUrl",
+                target: data
+            });
         });
     },
 
