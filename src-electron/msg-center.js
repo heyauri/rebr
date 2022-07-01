@@ -1,6 +1,6 @@
 import { app } from 'electron'
-import * as log from "./lib/log";
-import * as utils from "./lib/utils";
+import * as log from "./lib/log.js";
+import * as utils from "./lib/utils.js";
 // const fs = require("fs");
 // const path = require("path");
 const moment = require("moment");

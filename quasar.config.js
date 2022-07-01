@@ -23,8 +23,8 @@ module.exports = configure(function (/* ctx */) {
         // --> boot files are part of "main.js"
         // https://v2.quasar.dev/quasar-cli-vite/boot-files
         boot: [
-
             'axios',
+            'global-event-bus'
         ],
 
         // https://v2.quasar.dev/quasar-cli-vite/quasar-config-js#css
@@ -188,7 +188,7 @@ module.exports = configure(function (/* ctx */) {
                 // https://www.electron.build/configuration/configuration
                 appId: 'rebr',
                 win: {
-                    publisherName: "bcci_helper-ia32",
+                    publisherName: "rebr-ia32",
                     target: {
                         target: "nsis",
                         // arch: ["ia32","x64"]

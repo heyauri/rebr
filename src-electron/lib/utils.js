@@ -1,7 +1,6 @@
 const fs = require("fs");
 const path = require("path");
 const moment = require("moment");
-import * as log from "./lib/log";
 
 import {
     app
