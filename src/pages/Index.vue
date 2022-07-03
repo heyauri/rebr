@@ -23,7 +23,7 @@ export default defineComponent({
     data() {
         return {
             dialogShow: false,
-            targetUrl: ""
+            targetUrl: "https://www.qq.com"
         };
     },
     mounted() {
