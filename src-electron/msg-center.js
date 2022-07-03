@@ -12,6 +12,7 @@ import {
 import * as log from './lib/log.js'
 import * as utils from './lib/utils.js'
 import path from 'path'
+import fs from 'fs'
 import os from 'os'
 import * as injectScripts from './scripts'
 
@@ -62,7 +63,7 @@ function initNewWindow(url, windows) {
   newWindow.on('hide', windowHide)
   newWindow.on('minimize', windowHide)
 
-  newWindow.loadURL(url)
+  newWindow.loadURL(url, { userAgent: utils.getUserAgent() })
 
   newWindow.webContents.on('did-finish-load', function () {
     newWindow.webContents.executeJavaScript(injectScripts.defaultInit)
@@ -70,6 +71,27 @@ function initNewWindow(url, windows) {
   if (process.env.DEBUGGING && debug) {
     newWindow.webContents.openDevTools()
   }
+}
+
+let data_file_dir = utils.getDataSavePath()
+let writeResponseFile = function (data) {
+  return new Promise((resolve, reject) => {
+    try {
+      fs.writeFileSync(
+        path.join(
+          data_file_dir,
+          `${moment().format('YYYY-MM-DD-HHmmss')}&${data['url'].replace(
+            /[\\\/\:\.]+/gi,
+            '-',
+          )}.txt`,
+        ),
+        JSON.stringify(data),
+      )
+      resolve(true)
+    } catch (e) {
+      reject(e)
+    }
+  })
 }
 
 /**
@@ -103,6 +125,26 @@ async function bindMsgCenter(ipcMain, windows) {
             break
         }
         break
+      case 'childWindow':
+        switch (args['msg']) {
+          case 'xhrData':
+            log.data.info(args['target'])
+            writeResponseFile(args['target'])
+              .then((info) => {
+                console.log(`write successfully:${args['target']['url']}`)
+                send2win(mainWindow, {
+                  msg: 'xhrData',
+                  data: Object.assign(
+                    { t: moment().format('YYYY-MM-DD HH:mm:ss') },
+                    args['target'],
+                  ),
+                })
+              })
+              .catch((e) => {
+                log.operation.error('writeDataError', e)
+              })
+            break
+        }
     }
   })
 }

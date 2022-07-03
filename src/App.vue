@@ -53,6 +53,8 @@ export default defineComponent({
                         state.logSrc = assets["logSrc"] || "";
                         state.dataSrc = assets["dataSrc"] || ""
                     });
+                case "xhrData":
+                    _this.$global.$emit("xhrMsg", res["data"]);
                 // console.log(store);
                 // console.log(store.$state.logSrc, store.$state.dataSrc);
                 // console.log(store.logSrcPath, store.dataSrcPath);

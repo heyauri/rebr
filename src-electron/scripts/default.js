@@ -4,7 +4,7 @@
 //初始注入
 export let init = function () {
   try {
-    let oldXHROpen = window.XMLHttpRequest.prototype.open;
+    let oldXHROpen = window.XMLHttpRequest.prototype.open
     window.XMLHttpRequest.prototype.open = function (
       method,
       url,
@@ -13,10 +13,19 @@ export let init = function () {
       password,
     ) {
       this.addEventListener('load', function () {
+        window.api.send('toMain', {
+          source: 'childWindow',
+          msg: 'xhrData',
+          target: {
+            url: this.responseURL,
+            response: this.response,
+            responseText: this.responseText,
+            status: this.status,
+          },
+        })
         console.log('data: ' + this.responseText)
       })
-
-      console.log("init success");
+      console.log('init success')
       return oldXHROpen.apply(this, arguments)
     }
   } catch (e) {

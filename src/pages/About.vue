@@ -5,7 +5,7 @@
                 <div class="text-overline text-orange-9">About</div>
                 <div class="text-h6">应用说明 <q-badge align="top">v1.0.1beta</q-badge>
                 </div>
-                <div class="text-subtitle2">2022.07.01</div>
+                <div class="text-subtitle2">2022.07.03</div>
             </q-card-section>
             <q-separator dark />
             <q-separator dark />

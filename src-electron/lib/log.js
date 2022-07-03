@@ -8,7 +8,6 @@ const LOG_PATH = path.join(app.getPath('userData'), 'logs');
 console.log(LOG_PATH);
 
 log4js.configure({
-
     appenders: {
         // 设置控制台输出 （默认日志级别是关闭的（即不会输出日志））
         out: {
@@ -22,6 +21,13 @@ log4js.configure({
             alwaysIncludePattern: true // 始终包含pattern
         },
         httpLog: {
+            type: "dateFile",
+            filename: path.join(LOG_PATH, 'http'),
+            pattern: ".yyyy-MM-dd.log",
+            keepFileExt: true, // 文件名是否需要加".log"后缀
+            alwaysIncludePattern: true
+        },
+        dataLog: {
             type: "dateFile",
             filename: path.join(LOG_PATH, 'http'),
             pattern: ".yyyy-MM-dd.log",
@@ -78,6 +84,10 @@ log4js.configure({
             appenders: ['out', 'operationLog'],
             level: "debug"
         },
+        data: {
+            appenders: ['out', 'dataLog'],
+            level: "debug"
+        },
         main: {
             appenders: ['out', 'mainProccessLog'],
             level: "debug"
@@ -103,3 +113,4 @@ export let main = log4js.getLogger('main');
 export let renderer = log4js.getLogger('renderer');
 export let crash = log4js.getLogger('crash');
 export let operation = log4js.getLogger("operation");
+export let data = log4js.getLogger("data");
