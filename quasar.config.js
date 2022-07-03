@@ -169,7 +169,7 @@ module.exports = configure(function (/* ctx */) {
 
             inspectPort: 5858,
 
-            bundler: 'builder', // 'packager' or 'builder'
+            bundler: 'packager', // 'packager' or 'builder'
 
             packager: {
                 // https://github.com/electron-userland/electron-packager/blob/master/docs/api.md#options
@@ -192,7 +192,7 @@ module.exports = configure(function (/* ctx */) {
                     target: {
                         target: "nsis",
                         // arch: ["ia32","x64"]
-                        arch: ["ia32"]
+                        arch: ["x64"]
                     }
                 },
                 // win:{
