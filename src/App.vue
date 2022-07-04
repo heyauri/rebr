@@ -19,12 +19,9 @@ export default defineComponent({
         }
     },
     methods: {
-
     },
     mounted() {
         let _this = this;
-        console.log(this.$store)
-        let emit = _this.$global.$emit;
         let send2main = function (data) {
             window.api.send("toMain", Object.assign({
                 source: "main",
@@ -32,12 +29,13 @@ export default defineComponent({
         }
         const store = mainStore();
         let cId = setInterval(() => {
-            if (!store.dataSrc) {
+            if (!store.$state.dataSrc) {
+                console.log(cId);
                 send2main({ msg: "getAssetsPath" });
             } else {
                 clearInterval(cId);
             }
-        }, 1000);
+        }, 1100);
         /**
          * 主界面消息中心部分
          */
@@ -65,6 +63,8 @@ export default defineComponent({
         /**
          * 中转消息到主进程
          */
+        _this.$global.$off("closeWindows");
+        _this.$global.$off("accessUrl");
         _this.$global.$on("closeWindows", data => {
             for (let t of data) {
                 send2main({

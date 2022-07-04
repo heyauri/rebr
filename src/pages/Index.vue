@@ -1,7 +1,7 @@
 <template>
     <q-page class="column juestify-start" style="width: 100%">
-        <div class="row items-center" style="width: 100%;height:120px;">
-            <div class="col-8 q-pa-lg">
+        <div class="row items-center" style="width: 100%;height:80px;">
+            <div class="col-8 q-pa-sm">
                 <q-input outlined color="primary" v-model="targetUrl" label="网址" placeholder="以http://或https://开头的目标页面">
                 </q-input>
             </div>
@@ -9,6 +9,9 @@
                 <q-btn size="md" align="between" color="secondary" label="访问网站" icon="check" @click="accessWebpage" />
             </div>
         </div>
+        <p class="text-comment q-pa-sm" style="width: 98%; margin: 0px auto;">
+            *请在上方输入要访问的网址后点击，“访问网页”按钮
+        </p>
         <div class="column" style="width: 98%; margin: 20px auto;" v-if="msgArr.length > 0">
             <p style="font-size:1.5em;padding:10px 40px;margin:0">消息记录</p>
             <div style="width: 80%; max-width: 1200px;  margin: 20px auto;">
