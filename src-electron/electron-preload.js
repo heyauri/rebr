@@ -17,7 +17,7 @@
  */
 
 
-import { contextBridge, ipcRenderer, desktopCapturer } from 'electron';
+import { contextBridge, ipcRenderer } from 'electron';
 contextBridge.exposeInMainWorld(
     "api", {
     send: (channel, data) => {
